@@ -10,7 +10,7 @@ public class Main {
                 " активный идеальный космический впечатляющий футбольный идеальная идиома ";
 
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(wordsString.split("\\s+")));
-        HashMap<String, ArrayList<String>> result = (HashMap<String, ArrayList<String>>) arrayList.stream().sorted((s1, s2) -> {
+        Map<String, ArrayList<String>> result = arrayList.stream().sorted((s1, s2) -> {
 
             if (s1.length() > s2.length()) {
                 return -1;
@@ -19,12 +19,12 @@ public class Main {
                 return 1;
             }
             return s1.compareTo(s2);
-        }).collect(Collectors.toMap(s -> String.valueOf(s.charAt(0)), s -> new ArrayList<String>(Arrays.asList(s)), (i1, i2) -> {
+        }).collect(Collectors.toMap(s -> String.valueOf(s.charAt(0)), s -> new ArrayList<>(Arrays.asList(s)), (i1, i2) -> {
              i1.add(i2.get(0));
              return i1;
         })).entrySet().stream().filter(k -> k.getValue().size() > 1).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        SortedMap<String, ArrayList<String>> sortedResult = new TreeMap<String, ArrayList<String>>(result);
+        SortedMap<String, ArrayList<String>> sortedResult = new TreeMap<>(result);
 
 
 
